@@ -37,7 +37,7 @@ export const NavItem = ({active, ...props} : NavItemProps) => {
     return (
         <Link 
             className = {cn(
-                "font-mono text-sm font-meduim text-muted-foreground transition-’color duration-300",
+                "font-mono text-sm font-medium text-muted-foreground transition-color duration-300",
                  active && "text-foreground"
             )}
             {...props}

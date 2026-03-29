@@ -1,9 +1,12 @@
-import { Button } from "@/components/ui/button";
+import { ProfileCover } from "./profile-cover"
+import { ProfileHeader } from "./profile-header"
+
 export const Home = () => {
     return (
-        <div>Hom
-            <Button>Click me</Button>
-        </div>
-        
-    );
+    <div className="mx-auto md:max-w-3xl">
+        <ProfileCover></ProfileCover>
+        <ProfileHeader></ProfileHeader>
+    </div>
+    )
+
 }
