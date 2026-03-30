@@ -19,7 +19,7 @@ export function ProfileHeader(){
                 </div>
                 <div className="border-t border-line">
                     <div className="flex items-center gap-2 pl-4">
-                        <h1 className="-translate-y-px text-3xl font-semibold tracking-tight">
+                        <h1 className="-translate-y-px text-3xl tracking-tight">
                             {USER.firstName} {USER.lastName} 
                         </h1>
                         <VerifiedIcon className="size-4.5 text-info select-none" />
