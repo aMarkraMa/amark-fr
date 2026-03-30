@@ -11,4 +11,11 @@ export const USER: User = {
         "Machine Learning Engineer",
         "AI Engineer"
       ],
+    address: "Paris, France",
+    phone: "+33 06 03 65 47 71",
+    site: "amark.fr" ,
+    email: "kramashengqi@gmail.com" ,
+    gender: "he/him",
+    nationality: "Chinese",
+    
 }

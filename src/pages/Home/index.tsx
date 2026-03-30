@@ -1,12 +1,14 @@
-import { ProfileCover } from "./profile-cover"
-import { ProfileHeader } from "./profile-header"
+import { ProfileCover } from "@/pages/Home/profile-cover/profile-cover"
+import { ProfileHeader } from "@/pages/Home/profile-header/profile-header"
 import { Separator } from "@/components/layout/Separator"
+import { Overview } from "./overview"
 export const Home = () => {
     return (
     <div className="mx-auto md:max-w-3xl">
         <ProfileCover></ProfileCover>
         <ProfileHeader></ProfileHeader>
         <Separator></Separator>
+        <Overview></Overview>
     </div>
     )
 
