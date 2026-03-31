@@ -1,5 +1,6 @@
 import * as React from "react"
 import {cn} from "@/lib/utils"
+import { Slot } from "radix-ui"
 export const Panel = ({className, ...props}: React.ComponentProps<"section">) => {
     return (
         <section
@@ -12,6 +13,21 @@ export const Panel = ({className, ...props}: React.ComponentProps<"section">) =>
         />
     )
 }
+export function PanelTitle({
+    className,
+    asChild = false,
+    ...props
+  }: React.ComponentProps<"h2"> & { asChild?: boolean }) {
+    const Comp = asChild ? Slot.Root : "h2"
+  
+    return (
+      <Comp
+        data-slot="panel-title"
+        className={cn("text-3xl font-semibold tracking-tight", className)}
+        {...props}
+      />
+    )
+  }
 
 export const PanelHeader = ({className, ...props}: React.ComponentProps<"header">) => {
     return (

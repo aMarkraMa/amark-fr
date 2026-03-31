@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import React from "react";
+import * as React from "react";
 import type { NavItemType } from "@/types/nav"
 interface NavProps{
     items: NavItemType[];
