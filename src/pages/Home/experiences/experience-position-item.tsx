@@ -35,7 +35,7 @@ export function ExperiencePositionItem({position}: {position: Position}) {
                     </ProseMono>
                 </div>
 
-                <ul className="flex gap-2">
+                <ul className="flex flex-wrap gap-2">
                     {position.skills?.map((skill) => (
                         <li>
                             <Tag>{skill}</Tag>

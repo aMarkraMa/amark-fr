@@ -6,7 +6,7 @@ export const EXPERIENCE = [
         postitions: [
             {
                 positionTitle: "Full Stack Engineer",
-                contractType: "Apprentiship",
+                contractType: "Apprenticeship",
                 start: "09.2024",
                 end: "10.2025",
                 description:
@@ -81,6 +81,44 @@ export const EXPERIENCE = [
                     "CI/CD",
                     "Nacos",
                     "Logstash",
+                ],
+            },
+        ],
+    },
+    {
+        companyName: "Education",
+        companyLogo: "/public/assets/company-logos/education.svg",
+        companyWebsite: "1",
+        postitions: [
+            {
+                positionTitle: "Computer Science Master - Université Paris Dauphine - PSL",
+                contractType: "Intership",
+                start: "05.2023",
+                end: "08.2023",
+                description:"",
+                skills: [
+                    "Machine Learning",
+                    "Statistic",
+                    "Modeling",
+                    "Advanced Programming",
+                    "Project Management",
+                    "Distributed Systems",
+                    "Web Data",
+                ],
+            },
+            {
+                positionTitle: "Computer Science Bachelor - Université Paris Dauphine - PSL",
+                contractType: "Intership",
+                start: "05.2023",
+                end: "08.2023",
+                description:"",
+                skills: [
+                    "Java",
+                    "C++",
+                    "Database",
+                    "Graph Theory",
+                    "Algorithms",
+                    "Maven",
                 ],
             },
         ],
