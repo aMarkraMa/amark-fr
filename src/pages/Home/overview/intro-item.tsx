@@ -14,8 +14,9 @@ export function IntroItemIcon({className, ...props}: React.ComponentProps<"div">
     return (
         <div  
             className={cn(
-                "flex size-6 shrink-0 items-center justify-center rounded-lg border border-muted-foreground/15",
+                "flex size-6 shrink-0 items-center justify-center rounded-lg border border-muted-foreground/15 ",
                 "[&_svg]:pointer-events-none [&_svg]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4",
+                "bg-muted ring-1 ring-line ring-offset-1 ring-offset-background",
                 className
             )}
             {...props}
