@@ -17,7 +17,7 @@ import {
 import { USER } from "@/pages/Home/data/user";
 export const Overview = () => {
     return (
-        <Panel className="after:content-none">
+        <Panel className="after:content-none select-none">
             <PanelContent className="space-y-2.5">
                
                 <div className="grid gap-x-4 gap-y-2.5 sm:grid-cols-2 ">

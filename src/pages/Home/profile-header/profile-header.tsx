@@ -4,7 +4,7 @@ import { TextFlip } from "./text-flip"
 
 export function ProfileHeader(){
     return (
-        <div className="border-x screen-line-bottom flex border-line">
+        <div className="border-x screen-line-bottom flex border-line select-none">
             <div className="shrink-0 border-r border-line">
                 <div className="mx-0.5 my-0.75">
                     <img className="size-30 rounded-full ring-1 ring-border ring-offset-2 ring-offset-background select-none sm:size-40" 

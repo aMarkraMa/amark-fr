@@ -1,5 +1,5 @@
 import type { User } from "@/pages/Home/types/user";
-import photo from "/public/assets/profile/avatar.webp";
+import photo from "/assets/profile/avatar.webp";
 
 export const USER: User = {
     avatarUrl: photo,
