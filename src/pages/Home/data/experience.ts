@@ -1,7 +1,7 @@
 export const EXPERIENCE = [
     {
         companyName: "Bpifrance",
-        companyLogo: "/public/assets/company-logos/bpifrance-logo.webp",
+        companyLogo: "/assets/company-logos/bpifrance-logo.webp",
         companyWebsite: "https://www.bpifrance.fr/",
         postitions: [
             {
@@ -29,7 +29,7 @@ export const EXPERIENCE = [
     },
     {
         companyName: "China Unicom",
-        companyLogo: "/public/assets/company-logos/unicom-logo.webp",
+        companyLogo: "/assets/company-logos/unicom-logo.webp",
         companyWebsite: "https://www.bpifrance.fr/",
         postitions: [
             {
@@ -57,7 +57,7 @@ export const EXPERIENCE = [
     },
     {
         companyName: "FAW Group",
-        companyLogo: "/public/assets/company-logos/faw-logo.webp",
+        companyLogo: "/assets/company-logos/faw-logo.webp",
         companyWebsite: "https://www.bpifrance.fr/",
         postitions: [
             {
@@ -87,7 +87,7 @@ export const EXPERIENCE = [
     },
     {
         companyName: "Education",
-        companyLogo: "/public/assets/company-logos/education.svg",
+        companyLogo: "/assets/company-logos/education.svg",
         companyWebsite: "1",
         postitions: [
             {
