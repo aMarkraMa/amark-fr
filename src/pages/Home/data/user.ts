@@ -8,8 +8,8 @@ export const USER: User = {
     flipSentences: [
         "Creating with code. Small details matter.",
         "Full Stack Engineer",
-        "Machine Learning Engineer",
         "AI Engineer",
+        "Born to be alive"
     ],
     address: "Paris, France",
     phone: "+33 06 03 65 47 71",

@@ -92,9 +92,9 @@ export const EXPERIENCE = [
         postitions: [
             {
                 positionTitle: "Computer Science Master - Université Paris Dauphine - PSL",
-                contractType: "Intership",
-                start: "05.2023",
-                end: "08.2023",
+                contractType: "Paris, FR",
+                start: "09.2023",
+                end: "01.2026",
                 description:"",
                 skills: [
                     "Machine Learning",
@@ -108,9 +108,9 @@ export const EXPERIENCE = [
             },
             {
                 positionTitle: "Computer Science Bachelor - Université Paris Dauphine - PSL",
-                contractType: "Intership",
-                start: "05.2023",
-                end: "08.2023",
+                contractType: "Paris, FR",
+                start: "09.2020",
+                end: "09.2023",
                 description:"",
                 skills: [
                     "Java",
@@ -121,6 +121,7 @@ export const EXPERIENCE = [
                     "Maven",
                 ],
             },
+            
         ],
     },
 ];
