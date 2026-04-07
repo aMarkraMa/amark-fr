@@ -1,0 +1,9 @@
+[project]
+name = "amark-fr"
+version = "0.1.0"
+dependencies = [
+    "fastapi>=0.135.3",
+    "google-genai>=1.70.0",
+    "python-dotenv>=1.2.2",
+    "uvicorn>=0.44.0",
+]
