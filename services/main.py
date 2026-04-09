@@ -1,3 +1,4 @@
+from fastapi.responses import StreamingResponse
 from google import genai
 from dotenv import load_dotenv
 from google.genai import types
@@ -11,14 +12,26 @@ client = genai.Client()
 config = types.GenerateContentConfig(
     system_instruction="respond shortly",
 )
-@app.get("/api/chat/response")
-async def root():
-    response = client.models.generate_content(
-        model="gemini-3-flash-preview",
+# get stream text with gemini api (private)
+def _gemini_text_stream():
+    stream = client.models.generate_content_stream(
+        model="gemini-3.1-flash-lite-preview",
         contents=["Explain how AI works"],
         config = config,
     )
-    return {"message": response.text} 
+    for chunk in stream:
+        text = getattr(chunk, "text", None) or ""
+        if text:
+            yield text
+
+# transform the stream text to http data stream
+@app.get("/api/chat/response")
+async def chat_response_stream():
+    return StreamingResponse(
+        _gemini_text_stream(), #a stream object
+        media_type="text/plain; charset=utf-8" # pure text
+    )
+
 
 @app.get("/api/chat/hello")
 async def hello():
