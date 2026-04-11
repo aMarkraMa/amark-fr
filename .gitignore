@@ -1,14 +1,58 @@
-# Env
+# ── Environment & secrets (never commit real keys) ─────────────────────────
 .env
 .env.*
 !.env.example
+!.env.exemple
 
-#Venv
-.venv
+# ── Python — services/ ─────────────────────────────────────────────────────
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-#vscode
-.vscode
+# ── Node / pnpm — frontend/ ───────────────────────────────────────────────
+node_modules/
+.pnpm-store/
 
-.pnpm-store
+# ── Build outputs (Vite, etc.) ─────────────────────────────────────────────
+dist/
+dist-ssr/
+build/
 
-.prettierrc
+# ── Logs ───────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ── Testing ───────────────────────────────────────────────────────────────
+coverage/
+
+# ── Local overrides (e.g. .env.local) ─────────────────────────────────────
+*.local
+
+# ── Editors — ignore personal; allow shared extension recommendations ─────
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# ── OS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Misc ───────────────────────────────────────────────────────────────────
+*.tmp
+*.temp
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
