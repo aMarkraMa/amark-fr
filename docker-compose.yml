@@ -1,0 +1,30 @@
+services:
+  chat-api:
+    build:
+      context: ./services/chat-api
+      dockerfile: Dockerfile
+    container_name: chat-api
+    env_file:
+      - ./services/chat-api/.env.local
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./services/chat-api:/app
+      - /app/.venv
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    environment:
+      - VITE_API_PROXY_TARGET=http://chat-api:8000
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - chat-api
+    restart: unless-stopped

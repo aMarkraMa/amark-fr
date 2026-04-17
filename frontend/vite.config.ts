@@ -4,6 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 
 // https://vite.dev/config/
+const apiProxyTarget = process.env.VITE_API_PROXY_TARGET ?? "http://127.0.0.1:8000";
+
 export default defineConfig({
     resolve: {
         alias: {
@@ -14,7 +16,7 @@ export default defineConfig({
     server: {
         proxy: {
             "/api": {
-                target: "http://127.0.0.1:8000",
+                target: apiProxyTarget,
                 changeOrigin: true,
             },
         },
