@@ -1,40 +1,56 @@
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
+import type { ChatMessage } from "../types/message";
+import { Markdown } from "@/components/markdown";
 
-export function Response() {
-    const [message, setMessage] = useState("");
-    const [hello, setHello] = useState("");
+type ResponseProps = {
+    messages: ChatMessage[];
+    isLoading: boolean;
+    error: string | null;
+};
 
-    async function loadMessage() {
-        loadHello();
-        setMessage("");
-        const res = await fetch("/api/chat/response");
-        if (!res.ok || !res.body) {
-            setMessage("request false");
-            return;
-        }
-        const reader = res.body.getReader();
-        const decoder = new TextDecoder();
-        while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            const piece = decoder.decode(value, { stream: true });
-            setMessage((prev) => prev + piece);
-        }
-        setMessage((prev) => prev + decoder.decode())        
-    }
-    async function loadHello() {
-        const data = await fetch("/api/chat/hello").then((r) => r.json());
-        setHello(data.message ?? "");
-    }
+export function Response({ messages, isLoading, error }: ResponseProps) {
+    const endRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }, [messages, isLoading]);
+
     return (
-        <div>
-            <Button className="w-10 h-9" onClick={loadMessage}>
-                Button
-            </Button>
+        <div className="h-full overflow-y-auto p-3">
+            <div className="flex min-h-full flex-col gap-3">
+                {messages.length === 0 ? null : (
+                    messages.map((msg, index) => {
+                        const isUser = msg.role === "user";
+                        return (
+                            <div
+                                key={`${msg.role}-${index}`}
+                                className={`flex ${isUser ? "justify-end" : "justify-start"}`}
+                            >
+                                <div
+                                    className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm text-foreground ${
+                                        isUser ? "bg-secondary/70" : "bg-muted/70"
+                                    }`}
+                                >
+                                    {isUser ? (
+                                        msg.text
+                                    ) : (
+                                        <div className="prose prose-sm max-w-none text-foreground dark:prose-invert prose-p:text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-li:text-foreground prose-a:text-foreground prose-code:text-foreground">
+                                            <Markdown>
+                                                {msg.text || (isLoading ? "..." : "")}
+                                            </Markdown>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })
+                )}
 
-            <p>{message}</p>
-            <p>{hello}</p>
+                {error ? (
+                    <p className="text-sm text-destructive">{error}</p>
+                ) : null}
+                <div ref={endRef} />
+            </div>
         </div>
     );
 }
