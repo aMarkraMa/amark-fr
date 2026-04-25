@@ -105,7 +105,7 @@ export function useHandleSend({
         if (!last.text.trim()) {
           cloned[lastIndex] = {
             ...last,
-            text: "请求失败，请重试。",
+            text: "Reqeust False，please try again later。",
           };
         }
         return cloned;

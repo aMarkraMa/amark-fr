@@ -34,7 +34,7 @@ export function Response({ messages, isLoading, error }: ResponseProps) {
                                     {isUser ? (
                                         msg.text
                                     ) : (
-                                        <div className="prose prose-sm max-w-none text-foreground dark:prose-invert prose-p:text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-li:text-foreground prose-a:text-foreground prose-code:text-foreground">
+                                        <div className="prose prose-sm prose-no-margin max-w-none text-foreground dark:prose-invert prose-p:my-0 prose-headings:my-2 prose-li:my-0 prose-p:text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-li:text-foreground prose-a:text-foreground prose-code:text-foreground">
                                             <Markdown>
                                                 {msg.text || (isLoading ? "..." : "")}
                                             </Markdown>
