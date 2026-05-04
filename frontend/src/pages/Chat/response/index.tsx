@@ -27,18 +27,18 @@ export function Response({ messages, isLoading, error }: ResponseProps) {
                                 className={`flex ${isUser ? "justify-end" : "justify-start"}`}
                             >
                                 <div
-                                    className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm text-foreground ${
-                                        isUser ? "bg-secondary/70" : "bg-muted/70"
+                                    className={`max-w-[85%] rounded-2xl px-3 py-2 text-foreground ${
+                                        isUser
+                                            ? "whitespace-pre-wrap bg-secondary/70 text-sm"
+                                            : "bg-muted/70 text-[13px] leading-[1.65]"
                                     }`}
                                 >
                                     {isUser ? (
                                         msg.text
                                     ) : (
-                                        <div className="prose prose-sm prose-no-margin max-w-none text-foreground dark:prose-invert prose-p:my-0 prose-headings:my-2 prose-li:my-0 prose-p:text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-li:text-foreground prose-a:text-foreground prose-code:text-foreground">
-                                            <Markdown>
-                                                {msg.text || (isLoading ? "..." : "")}
-                                            </Markdown>
-                                        </div>
+                                        <Markdown className="size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+                                            {msg.text || (isLoading ? "..." : "")}
+                                        </Markdown>
                                     )}
                                 </div>
                             </div>

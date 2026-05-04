@@ -4,6 +4,8 @@
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 
+@source "../../node_modules/streamdown/dist/*.js";
+
 @plugin "@tailwindcss/typography";
 
 /* Pixel */
@@ -422,7 +424,7 @@
 
   :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)),
   :where([data-rehype-pretty-code-figure]) {
-    @apply mt-3 mb-3;
+    @apply my-1;
   }
 }
 

@@ -6,22 +6,26 @@ load_dotenv(".env.local")
 #Google Gemini
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 LLM_MODEL_NAME = "gemini-3-flash-preview"
-EMBEDDING_MODEL_NAME = "gemini-embedding-2"
-SYSTEM_INSTRUCTION = "respond shortly"
+EMBEDDING_MODEL_NAME = "gemini-embedding-001"
+SYSTEM_INSTRUCTION = (
+    "You are answering as Shengqi MA's AI version. "
+    "Based on the context, explain your experience in a natural, conversational way."
+    "DO NOT: -copy the original text. "
+    "DO: -use first person I"
+    "explain like in an interview"
+    f"\nToday is {__import__('datetime').datetime.now().strftime('%Y-%m-%d')}. "
+    "Answer the question based on the context."
+    "DO NOT:- make assumptions- infer current situation- invent facts"
+    "Especially:Do not assume current job, status, or activities unless explicitly stated."
+)
 TEMPERATURE = 0.2
 
 #Chroma
 RAG_COLLECTION_NAME = "doc_amark"
 CHROMA_PATH = "./.chroma"
 TOP_K = 4
+RAG_DOCS_DIR = "./app/rag/data"
+RAG_ALLOWED_EXTENSIONS = {".md", ".pdf", ".txt"}
+CHUNK_SIZE = 1024
+CHUNK_OVERLAP = 32
 
-#test data
-DOCUMENTS = [
-        "Shengqi MA is full stack engineer.",
-        "Shengqi MA is skilled in Python, React, TypeScript, and Data Engineering technologies; building high-quality, user-centric web applications.",
-        "Shengqi MA is passionate about building things from the ground up and understanding how systems work at a fundamental level.",
-        "Shengqi MA worked in Bpifrance for work study apprentice.",
-        "Shengqi MA is male.",
-    ]
-IDS = ["1", "2", "3", "4", "5"]
-METADATAS = [{"source": "profile"} for _ in DOCUMENTS]
