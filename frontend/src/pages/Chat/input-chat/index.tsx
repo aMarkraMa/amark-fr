@@ -9,16 +9,23 @@ type InputChatProps = {
   setInput: Dispatch<SetStateAction<string>>;
   onSend: () => void | Promise<void>;
   isLoading: boolean;
+  className?: string;
 };
 
-export function InputChat({ input, setInput, onSend, isLoading }: InputChatProps) {
+export function InputChat({
+  input,
+  setInput,
+  onSend,
+  isLoading,
+  className = "",
+}: InputChatProps) {
   return (
-    <Field className="shrink-0">
-      <ButtonGroup>
+    <Field className={`shrink-0 ${className}`}>
+      <ButtonGroup className="w-full">
         <Input
           id="input-button-group"
           placeholder="Type your message..."
-          className="h-10"
+          className="h-11 px-4"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
@@ -29,7 +36,7 @@ export function InputChat({ input, setInput, onSend, isLoading }: InputChatProps
           }}
           disabled={isLoading}
         />
-        <Button variant="outline" className="h-10" onClick={() => void onSend()} disabled={isLoading}>
+        <Button variant="outline" className="h-11 px-4" onClick={() => void onSend()} disabled={isLoading}>
           {isLoading ? "Sending..." : "Send"}
         </Button>
       </ButtonGroup>
