@@ -39,7 +39,9 @@ export function useHandleSend({
 
     try {
       const payload: ChatRequest = {
-        messages: nextMessages.slice(0, -1),
+        messages: nextMessages
+          .slice(0, -1)
+          .filter((m) => m.text.trim().length > 0),
       };
 
       const res = await fetch("/api/chat/response", {

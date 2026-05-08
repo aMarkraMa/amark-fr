@@ -3,8 +3,7 @@ from pathlib import Path
 from typing import Iterable
 from pypdf import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from datetime import datetime, timezone
 import chromadb
 from app.config import (
@@ -13,27 +12,21 @@ from app.config import (
     CHUNK_SIZE,
     CHUNK_OVERLAP,
     EMBEDDING_MODEL_NAME,
-    GEMINI_API_KEY,
     CHROMA_PATH,
     RAG_COLLECTION_NAME,
 )
-# def _get_embedding_model() -> GoogleGenerativeAIEmbeddings:
-#     return GoogleGenerativeAIEmbeddings(
-#         model=EMBEDDING_MODEL_NAME,
-#         google_api_key=GEMINI_API_KEY,
-#     )
-
 
 def _get_embedding_model():
-    return HuggingFaceEmbeddings(
-        model_name="BAAI/bge-m3",
-        model_kwargs={"device": "cpu"},
-        encode_kwargs={"normalize_embeddings": True},
+    return OpenAIEmbeddings(
+        model=EMBEDDING_MODEL_NAME
     )
 
 def _get_collection():
     chroma_client = chromadb.PersistentClient(path=CHROMA_PATH)
-    collection = chroma_client.get_or_create_collection(name=RAG_COLLECTION_NAME)
+    collection = chroma_client.get_or_create_collection(
+        name=RAG_COLLECTION_NAME,
+        metadata={"hnsw:space": "cosine"},
+    )
     return collection
 
     

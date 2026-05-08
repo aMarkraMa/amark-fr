@@ -2,7 +2,6 @@
 .env
 .env.*
 !.env.example
-!.env.exemple
 
 # ── Python — services/ ─────────────────────────────────────────────────────
 .venv/
@@ -56,3 +55,5 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+.chroma
