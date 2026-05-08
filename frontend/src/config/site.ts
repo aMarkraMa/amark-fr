@@ -5,10 +5,6 @@ export const NAV_ITEMS: NavItemType[]= [
         path: "/"
     },
     {
-        title: "Blog",
-        path: "/blog"
-    },
-    {
         title: "Chat",
         path: "/chat"
     }  
