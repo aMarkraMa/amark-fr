@@ -1,26 +1,32 @@
-# amark-fr
+# Personal Site Starter
 
-个人站点 monorepo：前端（Vite + React）与聊天后端（FastAPI + RAG / Chroma）。
+A monorepo for a personal portfolio site with an optional AI chat assistant (RAG).
 
-## 前置条件
+| Package | Stack |
+|---------|--------|
+| `frontend/` | Vite, React 19, TypeScript, Tailwind CSS, React Router |
+| `services/chat-api/` | FastAPI, OpenAI embeddings, ChromaDB |
 
-- **后端**：Python 3.12、[uv](https://github.com/astral-sh/uv)
-- **前端**：Node 20+、[pnpm](https://pnpm.io)
+Live example: [amark.fr](https://amark.fr)
 
-## 启动后端
+---
+
+## Prerequisites
+
+- **Node.js** 20+ and [pnpm](https://pnpm.io)
+- **Python** 3.12 and [uv](https://github.com/astral-sh/uv) (chat API only)
+- An **OpenAI API key** if you want the chat / RAG features
+
+---
+
+## Quick start
 
 ```bash
-cd services/chat-api
-cp .env.exemple .env.local   # 编辑 .env.local，填入 OPENAI_API_KEY 等
-uv sync
-uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
 ```
 
-默认 API 在 `http://127.0.0.1:8000`。
-
-## 启动前端
-
-另开一个终端（需先起后端，或把代理指到已有 API）：
+### Frontend only
 
 ```bash
 cd frontend
@@ -28,33 +34,163 @@ pnpm install
 pnpm dev
 ```
 
-开发时 Vite 会把 `/api` 代理到本机 `http://127.0.0.1:8000`（可用环境变量 `VITE_API_PROXY_TARGET` 覆盖）。
+Open [http://127.0.0.1:5173](http://127.0.0.1:5173). The site runs without the backend; Chat will fail until the API is up.
 
-## 构建向量库（Chroma 索引）
-
-在 **`services/chat-api` 目录下**执行（与本地 `CHROMA_PATH` 一致，默认写入 `./.chroma`）：
+### Chat API (optional)
 
 ```bash
 cd services/chat-api
-uv run python app/rag/indexer.py
+cp .env.exemple .env.local   # then fill in your keys
+uv sync
+uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-需已配置 `.env.local` 中的 **`OPENAI_API_KEY`**（与当前 `OpenAIEmbeddings` 一致）。  
-全量重建可先删除旧库再跑：
+API: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+In development, Vite proxies `/api` to `http://127.0.0.1:8000`. Override with:
 
 ```bash
-rm -rf .chroma
-uv run python app/rag/indexer.py
+VITE_API_PROXY_TARGET=http://127.0.0.1:8000 pnpm dev
 ```
 
-线上若使用 Railway Volume，在平台里设置 **`CHROMA_PATH`**（例如 `/data/chroma`）后，在同一环境下运行上述 indexer，向量会写入该路径。
+### Docker Compose (optional)
 
-## 可选：Docker Compose
-
-在项目根目录：
+From the repo root (requires `services/chat-api/.env.local`):
 
 ```bash
 docker compose up --build
 ```
 
-具体端口见 `docker-compose.yml`。
+- Frontend: `http://127.0.0.1:5173`
+- API: `http://127.0.0.1:8000`
+
+---
+
+## Make it your site
+
+After cloning, replace the sample content with yours. Posts and projects are Markdown files loaded automatically via `import.meta.glob` — no manual registry for each file.
+
+### 1. Profile & home page
+
+| What | Where |
+|------|--------|
+| Name, bio, contact, avatar | `frontend/src/pages/Home/data/user.ts` |
+| Work experience | `frontend/src/pages/Home/data/experience.ts` |
+| Social links | `frontend/src/pages/Home/data/social-links.ts` |
+| Avatar & cover images | `frontend/public/assets/profile/` |
+| Company logos | `frontend/public/assets/company-logos/` |
+
+### 2. Navigation & site metadata
+
+Edit `frontend/src/config/site.ts` (nav items, UTM source / domain branding).
+
+### 3. Blog posts
+
+1. Add a Markdown file under `frontend/src/features/blog/content/` (filename = URL slug).
+2. Put cover images under `frontend/public/assets/blog/<slug>/`.
+3. Use frontmatter like:
+
+```md
+---
+title: My post title
+description: Short summary for the list and SEO.
+image: /assets/blog/my-post/cover.webp
+createdAt: 2026-01-15
+updatedAt: 2026-01-15
+pinned: false
+---
+
+Your content here…
+```
+
+Delete or replace the existing sample posts.
+
+### 4. Projects
+
+Same pattern as blog:
+
+- Content: `frontend/src/features/project/content/*.md`
+- Assets: `frontend/public/assets/project/<slug>/`
+
+Optional frontmatter fields: `link` (external / demo URL), `pinned: true`.
+
+### 5. Chat persona & knowledge base
+
+Only needed if you keep the Chat page.
+
+1. **API keys** — in `services/chat-api/.env.local`:
+
+   ```env
+   OPENAI_API_KEY="sk-..."
+   GEMINI_API_KEY="..."   # optional, depending on your setup
+   ```
+
+2. **Persona / system prompt** — edit `SYSTEM_INSTRUCTION` (and model names if needed) in `services/chat-api/app/config.py`.
+
+3. **Documents for RAG** — put `.md`, `.txt`, or `.pdf` files in `services/chat-api/app/rag/data/`. Remove the sample profile docs.
+
+4. **Build the vector index** (from `services/chat-api`, with `OPENAI_API_KEY` set):
+
+   ```bash
+   uv run python app/rag/indexer.py
+   ```
+
+   Default Chroma path: `./app/rag/data/.chroma` (override with `CHROMA_PATH`). Full rebuild:
+
+   ```bash
+   rm -rf app/rag/data/.chroma
+   uv run python app/rag/indexer.py
+   ```
+
+### 6. Deployment hooks
+
+If you deploy the frontend on Vercel (or similar), update `frontend/vercel.json`:
+
+- Host redirects for your domain
+- `/api` rewrite to your hosted chat API (e.g. Railway)
+- Any demo / project rewrites you no longer need
+
+---
+
+## Scripts
+
+### Frontend (`frontend/`)
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Dev server with HMR |
+| `pnpm build` | Typecheck + production build |
+| `pnpm preview` | Preview the production build |
+| `pnpm lint` | ESLint |
+
+### Chat API (`services/chat-api/`)
+
+| Command | Description |
+|---------|-------------|
+| `uv sync` | Install Python dependencies |
+| `uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000` | Dev server |
+| `uv run python app/rag/indexer.py` | Build / refresh Chroma index |
+
+---
+
+## Project layout
+
+```text
+.
+├── frontend/                 # Vite + React SPA
+│   ├── public/assets/        # Images, icons, static demos
+│   └── src/
+│       ├── config/           # Nav & site config
+│       ├── features/blog/    # Blog Markdown + UI
+│       ├── features/project/ # Project Markdown + UI
+│       └── pages/            # Home, Chat, Blog, Project
+└── services/
+    └── chat-api/             # FastAPI + RAG
+        └── app/rag/data/     # Source docs for the indexer
+```
+
+---
+
+## License
+
+Use and adapt freely for your own personal site. Replace all personal data, assets, and API keys before publishing.
