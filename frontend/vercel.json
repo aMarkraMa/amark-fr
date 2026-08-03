@@ -1,8 +1,34 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.amark.fr" }],
+      "destination": "https://amark.fr/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/project/demo/aipacman",
+      "destination": "/project/demo/aipacman/",
+      "permanent": false
+    },
+    {
+      "source": "/project/demo/projet-etudiant",
+      "destination": "/project/demo/projet-etudiant/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "https://amark-fr-production.up.railway.app/api/:path*"
+    },
+    {
+      "source": "/project/demo/aipacman/",
+      "destination": "https://ai-pacman.vercel.app/"
+    },
+    {
+      "source": "/project/demo/aipacman/:path*",
+      "destination": "https://ai-pacman.vercel.app/:path*"
     }
   ]
 }

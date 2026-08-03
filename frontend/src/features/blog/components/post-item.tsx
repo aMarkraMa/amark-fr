@@ -7,30 +7,42 @@ import { cn } from "@/lib/utils"
 export function PostItem({
   post,
   shouldPreloadImage,
+  basePath = "/blog",
+  fullWidth = false,
 }: {
   post: Post
   shouldPreloadImage?: boolean
+  basePath?: string
+  fullWidth?: boolean
 }) {
   const publishedAt = formatPostDate(post.metadata.createdAt)
 
   return (
     <Link
-      to={`/blog/${post.slug}`}
+      to={`${basePath}/${post.slug}`}
       className={cn(
         "group flex flex-col gap-2 p-2 transition-[background-color] ease-out hover:bg-accent-muted",
-        "max-sm:screen-line-top max-sm:screen-line-bottom",
-        "sm:nth-[2n+1]:screen-line-top sm:nth-[2n+1]:screen-line-bottom",
+        fullWidth
+          ? "screen-line-top screen-line-bottom"
+          : [
+              "max-sm:screen-line-top max-sm:screen-line-bottom",
+              "sm:nth-[2n+1]:screen-line-top sm:nth-[2n+1]:screen-line-bottom",
+            ],
       )}
     >
       {post.metadata.image && (
-        <div className="relative select-none [&_img]:aspect-1200/630 [&_img]:rounded-xl">
+        <div className="relative select-none">
           <img
             src={post.metadata.image}
             alt={post.metadata.title}
             width={1200}
             height={630}
             loading={shouldPreloadImage ? "eager" : "lazy"}
-            className="w-full rounded-xl"
+            className={cn(
+              "w-full rounded-xl aspect-1200/630",
+              // Keep Blog image height on wide cards; title stays below.
+              fullWidth && "sm:aspect-4/1 sm:object-cover",
+            )}
           />
 
           <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-black/10 ring-inset dark:ring-white/10" />

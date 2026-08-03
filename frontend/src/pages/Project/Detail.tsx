@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
+import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from "lucide-react"
 import { Link, Navigate, useParams } from "react-router-dom"
 
 import { Markdown } from "@/components/markdown"
@@ -8,31 +8,31 @@ import { Prose } from "@/components/ui/typegraphy"
 import { PostKeyboardShortcuts } from "@/features/blog/components/post-keyboard-shortcuts"
 import {
   findNeighbour,
-  getAllPosts,
-  getPostBySlug,
-} from "@/features/blog/data/posts"
+  getAllProjects,
+  getProjectBySlug,
+} from "@/features/project/data/projects"
 import { cn } from "@/lib/utils"
 
-export const BlogPost = () => {
+export const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>()
 
   if (!slug) {
-    return <Navigate to="/blog" replace />
+    return <Navigate to="/project" replace />
   }
 
-  const post = getPostBySlug(slug)
+  const project = getProjectBySlug(slug)
 
-  if (!post) {
-    return <Navigate to="/blog" replace />
+  if (!project) {
+    return <Navigate to="/project" replace />
   }
 
-  const allPosts = getAllPosts()
-  const { previous, next } = findNeighbour(allPosts, slug)
+  const allProjects = getAllProjects()
+  const { previous, next } = findNeighbour(allProjects, slug)
 
   return (
     <div className="mx-auto min-h-[calc(100dvh-3.5rem)] border-x border-line md:max-w-3xl">
       <PostKeyboardShortcuts
-        basePath="/blog"
+        basePath="/project"
         previous={previous}
         next={next}
       />
@@ -44,9 +44,9 @@ export const BlogPost = () => {
           size="sm"
           asChild
         >
-          <Link to="/blog">
+          <Link to="/project">
             <ArrowLeftIcon />
-            Blog
+            Project
           </Link>
         </Button>
 
@@ -57,9 +57,9 @@ export const BlogPost = () => {
               variant="secondary"
               size="icon-sm"
               asChild
-              title="Previous post"
+              title="Previous project"
             >
-              <Link to={`/blog/${previous.slug}`}>
+              <Link to={`/project/${previous.slug}`}>
                 <ArrowLeftIcon />
                 <span className="sr-only">Previous</span>
               </Link>
@@ -72,9 +72,9 @@ export const BlogPost = () => {
               variant="secondary"
               size="icon-sm"
               asChild
-              title="Next post"
+              title="Next project"
             >
-              <Link to={`/blog/${next.slug}`}>
+              <Link to={`/project/${next.slug}`}>
                 <span className="sr-only">Next</span>
                 <ArrowRightIcon />
               </Link>
@@ -95,17 +95,36 @@ export const BlogPost = () => {
 
       <Prose className="px-4">
         <h1 className="screen-line-bottom text-3xl font-semibold tracking-tight">
-          {post.metadata.title}
+          {project.metadata.title}
         </h1>
 
-        <p className="text-muted-foreground">{post.metadata.description}</p>
+        <p className="text-muted-foreground">{project.metadata.description}</p>
+
+        {project.metadata.link && (
+          <p>
+            <Button className="h-8 gap-1.5 font-mono" variant="secondary" asChild>
+              <a
+                href={project.metadata.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Demo
+                <ArrowUpRightIcon />
+              </a>
+            </Button>
+          </p>
+        )}
 
         <div>
-          <Markdown>{post.content}</Markdown>
+          <Markdown>{project.content}</Markdown>
         </div>
 
-        {post.metadata.pdf && (
-          <PdfEmbed src={post.metadata.pdf} title={post.metadata.title} />
+        {project.metadata.pdf && (
+          <PdfEmbed
+            src={project.metadata.pdf}
+            title={project.metadata.title}
+            heading="Dossier de cadrage"
+          />
         )}
       </Prose>
 

@@ -3,6 +3,8 @@ export type PostMetadata = {
   description?: string
   image?: string
   category?: string
+  link?: string
+  pdf?: string
   new?: boolean
   pinned?: boolean
   createdAt?: string

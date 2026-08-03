@@ -4,6 +4,8 @@ import { Layout } from '@/components/layout/Layout'
 import { Chat } from "@/pages/Chat";
 import { Blog } from "@/pages/Blog";
 import { BlogPost } from "@/pages/Blog/Post";
+import { Project } from "@/pages/Project";
+import { ProjectDetail } from "@/pages/Project/Detail";
 
 const routes = [
     { 
@@ -13,6 +15,8 @@ const routes = [
             {path: "/chat", element:<Chat/>},
             {path: "/blog", element: <Blog />},
             {path: "/blog/:slug", element: <BlogPost />},
+            {path: "/project", element: <Project />},
+            {path: "/project/:slug", element: <ProjectDetail />},
         ],
     },
 ];

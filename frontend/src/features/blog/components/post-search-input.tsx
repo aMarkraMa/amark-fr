@@ -7,7 +7,11 @@ import { cn } from "@/lib/utils"
 
 import { useSearchQuery } from "../hooks/use-search-query"
 
-export function PostSearchInput() {
+export function PostSearchInput({
+  placeholder = "Search Blog…",
+}: {
+  placeholder?: string
+}) {
   const { query, setQuery } = useSearchQuery()
 
   useEffect(() => {
@@ -27,7 +31,7 @@ export function PostSearchInput() {
 
       <Input
         className={cn("rounded-lg pl-8 shadow-none", query.length > 0 && "pr-8")}
-        placeholder="Search Blog…"
+        placeholder={placeholder}
         value={query}
         onChange={(event) => {
           setQuery(event.target.value)

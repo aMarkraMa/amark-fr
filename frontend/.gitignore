@@ -1,2 +1,3 @@
 # Monorepo: all ignore patterns are defined in the repository root `.gitignore`.
 # This file is kept so tooling that expects a package-level `.gitignore` still finds one.
+.vercel
