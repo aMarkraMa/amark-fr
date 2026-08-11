@@ -1,11 +1,12 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/:path((?!api/).*)",
       "has": [{ "type": "host", "value": "www.amark.fr" }],
       "destination": "https://amark.fr/:path*",
       "permanent": true
     },
+
     {
       "source": "/project/demo/aipacman",
       "destination": "/project/demo/aipacman/",

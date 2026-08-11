@@ -1,6 +1,6 @@
 ---
 title: La Vieille Sardine
-description: Site e-commerce fictif pour une marque de sardines bretonnes — dossier de cadrage et démo web.
+description: Site e-commerce fictif pour une marque de sardines bretonnes.
 image: /assets/project/sardine/cover.png
 link: https://web-sardine.vercel.app
 pdf: /assets/project/sardine/dossier-de-cadrage.pdf

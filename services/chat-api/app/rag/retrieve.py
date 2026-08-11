@@ -1,10 +1,12 @@
 from functools import lru_cache
+
 import chromadb
 from langchain_openai import OpenAIEmbeddings
+
 from app.config import (
+    CHROMA_PATH,
     DISTANCE_THRESHOLD,
     EMBEDDING_MODEL_NAME,
-    CHROMA_PATH,
     RAG_COLLECTION_NAME,
     RAG_FALLBACK_MAX_DISTANCE,
     RAG_FALLBACK_TOP_N,

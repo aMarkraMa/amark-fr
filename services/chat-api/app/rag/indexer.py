@@ -1,20 +1,23 @@
 import hashlib
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
-from pypdf import PdfReader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
-from datetime import datetime, timezone
+
 import chromadb
+from langchain_openai import OpenAIEmbeddings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from pypdf import PdfReader
+
 from app.config import (
-    RAG_ALLOWED_EXTENSIONS,
-    RAG_DOCS_DIR,
-    CHUNK_SIZE,
-    CHUNK_OVERLAP,
-    EMBEDDING_MODEL_NAME,
     CHROMA_PATH,
+    CHUNK_OVERLAP,
+    CHUNK_SIZE,
+    EMBEDDING_MODEL_NAME,
+    RAG_ALLOWED_EXTENSIONS,
     RAG_COLLECTION_NAME,
+    RAG_DOCS_DIR,
 )
+
 
 def _get_embedding_model():
     return OpenAIEmbeddings(

@@ -1,8 +1,14 @@
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
-from app.config import LLM_MODEL_NAME, SYSTEM_INSTRUCTION, TEMPERATURE, MAX_MESSAGES_SIZE
-from app.schemas import ChatMessage
+
+from app.config import (
+    LLM_MODEL_NAME,
+    MAX_MESSAGES_SIZE,
+    SYSTEM_INSTRUCTION,
+    TEMPERATURE,
+)
 from app.rag.retrieve import retrieve_context
+from app.schemas import ChatMessage
 
 LLM_SINGLETON = ChatOpenAI(
     model=LLM_MODEL_NAME,
