@@ -12,10 +12,6 @@ export const NAV_ITEMS: NavItemType[]= [
         title: "Blog",
         path: "/blog"
     },
-    {
-        title: "Project",
-        path: "/project"
-    },
 ]
 export const UTM_PARAMS = {
     utm_source: "amark.fr",
