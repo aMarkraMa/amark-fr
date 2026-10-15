@@ -32,6 +32,40 @@ def test_to_langchain_messages_with_rag_builds_system_and_role_mapping(monkeypat
     assert isinstance(lang_messages[3], HumanMessage)
 
 
+def test_short_greeting_skips_retrieval(monkeypatch):
+    called = []
+
+    def _fake_retrieve(query):
+        called.append(query)
+        return ["should not be used"]
+
+    monkeypatch.setattr("app.chat_services.retrieve_context", _fake_retrieve)
+
+    lang_messages = _to_langchain_messages_with_rag(
+        [ChatMessage(role="user", text="hi")]
+    )
+
+    assert called == []
+    assert "Context:" not in lang_messages[0].content
+
+
+def test_short_contact_query_still_retrieves(monkeypatch):
+    called = []
+
+    def _fake_retrieve(query):
+        called.append(query)
+        return ["Personal website: https://www.amark.fr"]
+
+    monkeypatch.setattr("app.chat_services.retrieve_context", _fake_retrieve)
+
+    lang_messages = _to_langchain_messages_with_rag(
+        [ChatMessage(role="user", text="github")]
+    )
+
+    assert called == ["github"]
+    assert "https://www.amark.fr" in lang_messages[0].content
+
+
 def test_stream_chat_response_parses_supported_chunk_shapes(monkeypatch):
     monkeypatch.setattr("app.chat_services.retrieve_context", lambda _query: [])
 

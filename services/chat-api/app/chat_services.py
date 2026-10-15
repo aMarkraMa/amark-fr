@@ -7,7 +7,7 @@ from app.config import (
     SYSTEM_INSTRUCTION,
     TEMPERATURE,
 )
-from app.rag.retrieve import retrieve_context
+from app.rag.retrieve import query_needs_retrieval, retrieve_context
 from app.schemas import ChatMessage
 
 LLM_SINGLETON = ChatOpenAI(
@@ -26,7 +26,7 @@ def _to_langchain_messages(messages: list[ChatMessage]):
 
 
 def _build_system_instruction(user_query: str) -> str:
-    if len(user_query) > 6:
+    if query_needs_retrieval(user_query):
         contexts = retrieve_context(user_query)
     else:
         contexts = ""

@@ -7,11 +7,14 @@ This document consolidates Shengqi MA's CV and personal profile into a single Ma
 ## Identity And Contact
 
 - Name: Shengqi MA
+- Personal website: https://www.amark.fr
 - Website: www.amark.fr
 - Email: kramashengqi@gmail.com
 - Phone: +33 (0)6 03 65 47 71
-- LinkedIn: linkedin.com/in/shengqi-ma
-- GitHub: github.com/aMarkraMa
+- LinkedIn: https://www.linkedin.com/in/shengqi-ma
+- LinkedIn profile: linkedin.com/in/shengqi-ma
+- GitHub: https://github.com/aMarkraMa
+- GitHub profile: github.com/aMarkraMa
 - Location: Paris, France, 3rd arrondissement, Arts et Metiers
 - Work authorization: Talent Passport / Passeport Talent Famille residence permit in France
 - Authorized to work in France: Yes
@@ -124,6 +127,9 @@ Project details:
 
 - Year: 2025
 - Website type: Personal full-stack portfolio and technical blog
+- Personal website: https://www.amark.fr
+- GitHub: https://github.com/aMarkraMa
+- LinkedIn: https://www.linkedin.com/in/shengqi-ma
 
 Project details:
 
@@ -264,3 +270,6 @@ Shengqi MA enjoys learning from first principles, solving complex problems, and 
 - Talent Passport France
 - Passeport Talent Famille
 - authorized to work in France
+- personal website www.amark.fr
+- GitHub github.com/aMarkraMa
+- LinkedIn linkedin.com/in/shengqi-ma

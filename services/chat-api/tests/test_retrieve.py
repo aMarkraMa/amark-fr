@@ -17,6 +17,24 @@ def test_build_query_variants_keeps_unrelated_questions_unchanged():
     ]
 
 
+def test_build_query_variants_expands_website_github_and_linkedin():
+    website = _build_query_variants("what's your website")
+    assert website[0] == "what's your website"
+    assert "www.amark.fr" in website[1]
+
+    github = _build_query_variants("github")
+    assert "github.com/aMarkraMa" in github[1]
+
+    linkedin = _build_query_variants("你的领英")
+    assert "linkedin.com/in/shengqi-ma" in linkedin[1]
+
+    french_site = _build_query_variants("ton site web")
+    assert "www.amark.fr" in french_site[1]
+
+    chinese_site = _build_query_variants("个人网站")
+    assert "www.amark.fr" in chinese_site[1]
+
+
 def test_rank_documents_deduplicates_by_best_distance():
     ranked = _rank_documents(
         documents_batch=[
