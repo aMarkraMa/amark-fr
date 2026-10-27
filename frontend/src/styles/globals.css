@@ -4,6 +4,8 @@
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source "../../node_modules/streamdown/dist/*.js";
 
 @plugin "@tailwindcss/typography";
@@ -66,6 +68,8 @@
 }
 
 :root {
+    color-scheme: light;
+
     --font-geist-sans: "Geist Variable", "Geist", sans-serif;
     --font-geist-mono: "Geist Mono Variable", "Geist Mono", monospace;
     --font-geist-pixel-square: "GeistPixel";
@@ -175,6 +179,8 @@
 }
 
 .dark {
+  color-scheme: dark;
+
   /* zinc-950 */
   --background: oklch(0.141 0.005 285.823);
 
