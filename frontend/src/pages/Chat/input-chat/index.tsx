@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Loader2Icon, SendIcon } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 
 type InputChatProps = {
@@ -36,7 +37,19 @@ export function InputChat({
           }}
           disabled={isLoading}
         />
-        <Button variant="outline" className="h-11 px-4" onClick={() => void onSend()} disabled={isLoading}>
+        <Button
+          type="button"
+          size="lg"
+          className="h-11 px-4"
+          onClick={() => void onSend()}
+          disabled={isLoading || !input.trim()}
+          aria-busy={isLoading}
+        >
+          {isLoading ? (
+            <Loader2Icon className="animate-spin motion-reduce:animate-none" aria-hidden="true" />
+          ) : (
+            <SendIcon aria-hidden="true" />
+          )}
           {isLoading ? "Sending..." : "Send"}
         </Button>
       </ButtonGroup>

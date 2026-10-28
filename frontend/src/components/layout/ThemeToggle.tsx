@@ -1,5 +1,7 @@
 import { MoonIcon, SunIcon } from "lucide-react"
+import { motion } from "motion/react"
 
+import { IconSwap, IconSwapItem } from "@/components/icon-swap"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "@/hooks/use-theme"
 
@@ -18,7 +20,13 @@ export function ThemeToggle() {
       title={label}
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
-      {isDark ? <SunIcon aria-hidden="true" /> : <MoonIcon aria-hidden="true" />}
+      <span className="relative flex size-4 items-center justify-center" aria-hidden="true">
+        <IconSwap>
+          <IconSwapItem key={theme} as={motion.span} className="inline-flex">
+            {isDark ? <SunIcon /> : <MoonIcon />}
+          </IconSwapItem>
+        </IconSwap>
+      </span>
     </Button>
   )
 }
